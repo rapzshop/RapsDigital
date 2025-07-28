@@ -1,0 +1,88 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #240046, #5a189a);
+  color: white;
+  margin: 0;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+h1 span {
+  font-size: 1.1rem;
+  display: block;
+  margin-top: 0.5rem;
+  color: #bde0fe;
+}
+
+select, button, input {
+  padding: 0.6rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  background-color: #ff4d6d;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff1c4d;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 20px;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.price-output {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.link-button {
+  display: inline-block;
+  background-color: #4cc9f0;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: 0.3s;
+}
+
+.link-button:hover {
+  background-color: #3a86ff;
+  color: white;
+}
+
+.page {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
