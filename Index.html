@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricelist - DIGITAL STORE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container page active" id="homePage">
+    <h1>DIGITAL STORE
+      <span>Tempat Suntik Followers, Views & Likes Termurah & Terpercaya!</span>
+    </h1>
+    <h2>Pricelist TikTok</h2>
+
+    <label for="category">Pilih Kategori:</label><br>
+    <select id="category">
+      <option value="followers">TikTok Followers</option>
+      <option value="likes">TikTok Likes</option>
+      <option value="views">TikTok Views</option>
+    </select><br>
+
+    <label for="option">Pilih Jumlah:</label><br>
+    <select id="option"></select>
+
+    <div class="price-output" id="price"></div>
+
+    <label for="payment">Pilih Metode Pembayaran:</label><br>
+    <select id="payment">
+      <option value="Gopay">Gopay</option>
+      <option value="Dana">Dana</option>
+      <option value="QRIS">QRIS</option>
+    </select><br>
+
+    <label for="link">Link Suntik (Wajib):</label><br>
+    <input type="url" id="link" placeholder="https://www.tiktok.com/@username ATAU https://vt.tiktok.com/..." required><br>
+
+    <button onclick="confirmOrder()">💬 Pesan Sekarang</button>
+    <br>
+    <a href="#" class="link-button" onclick="switchPage('orderPage')">📌 Cara Order</a>
+    <a href="#" class="link-button" onclick="switchPage('syaratPage')">⚠️ S&K</a>
+  </div>
+
+  <div class="container page" id="orderPage">
+    <h2>Cara Order</h2>
+    <ol>
+      <li>Pilih kategori (Followers / Likes / Views)</li>
+      <li>Pilih jumlah yang diinginkan</li>
+      <li>Lihat total harga otomatis</li>
+      <li>Masukkan link suntik (akun atau video TikTok)</li>
+      <li>Pilih metode pembayaran</li>
+      <li>Klik tombol "Pesan Sekarang"</li>
+      <li>Anda akan diarahkan ke WhatsApp</li>
+      <li>Konfirmasi dan lakukan pembayaran sesuai metode yang dipilih</li>
+    </ol>
+    <a href="#" class="link-button" onclick="switchPage('homePage')">⬅️ Kembali</a>
+  </div>
+
+  <div class="container page" id="syaratPage">
+    <h2>Syarat & Ketentuan</h2>
+    <p>Selama proses suntik, pastikan akun media sosial Anda:</p>
+    <ul>
+      <li>Tidak dalam mode private 🔓</li>
+      <li>Tidak mengganti username ❌</li>
+      <li>Tidak menghapus postingan 🗑️</li>
+      <li>Tidak menghapus akun ❌</li>
+    </ul>
+    <a href="#" class="link-button" onclick="switchPage('homePage')">⬅️ Kembali</a>
+  </div>
+
+  <div class="footer">
+    <p>S&K berlaku · 2025 © DIGITAL STORE</p>
+  </div>
+
+  <script src="sc.js"></script>
+</body>
+</html>
