@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricelist - DIGITAL STORE</title>
+  <title>Pricelist TikTok - DIGITAL STORE</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="container page active" id="homePage">
@@ -35,7 +36,7 @@
     <label for="link">Link Suntik (Wajib):</label><br>
     <input type="url" id="link" placeholder="https://www.tiktok.com/@username ATAU https://vt.tiktok.com/..." required><br>
 
-    <button onclick="confirmOrder()">💬 Pesan Sekarang</button>
+    <button type="button" onclick="confirmOrder()">💬 Pesan Sekarang</button>
     <br>
     <a href="#" class="link-button" onclick="switchPage('orderPage')">📌 Cara Order</a>
     <a href="#" class="link-button" onclick="switchPage('syaratPage')">⚠️ S&K</a>
@@ -71,7 +72,5 @@
   <div class="footer">
     <p>S&K berlaku · 2025 © DIGITAL STORE</p>
   </div>
-
-  <script src="sc.js"></script>
 </body>
 </html>
