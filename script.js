@@ -69,6 +69,16 @@ const data = {
       '9000 VIEW': 17000,
       '10000 VIEW': 19000
     }
+  },
+  premium: {
+    apps: {
+      'YouTube Premium 1 Bulan': 4000,
+      'CapCut Pro 1 Bulan': 20000,
+      'ChatGPT Pro 1 Bulan': 20000,
+      'AM Premium 1 Bulan Private': 8000,
+      'Viu Premium 1 Bulan Private': 4000,
+      'Canva 1 Bulan Private': 3000
+    }
   }
 };
 
@@ -81,12 +91,23 @@ function populateOptions() {
   option.innerHTML = '';
   const selectedPlatform = platform.value;
   const selectedCategory = category.value;
-  Object.keys(data[selectedPlatform][selectedCategory]).forEach(key => {
-    const opt = document.createElement('option');
-    opt.value = key;
-    opt.textContent = key;
-    option.appendChild(opt);
-  });
+
+  if (selectedPlatform === 'premium') {
+    Object.keys(data.premium.apps).forEach(key => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = key;
+      option.appendChild(opt);
+    });
+  } else {
+    Object.keys(data[selectedPlatform][selectedCategory]).forEach(key => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = key;
+      option.appendChild(opt);
+    });
+  }
+
   updatePrice();
 }
 
@@ -94,7 +115,14 @@ function updatePrice() {
   const selectedPlatform = platform.value;
   const selectedCategory = category.value;
   const selectedOption = option.value;
-  const harga = data[selectedPlatform][selectedCategory][selectedOption];
+
+  let harga = 0;
+  if (selectedPlatform === 'premium') {
+    harga = data.premium.apps[selectedOption];
+  } else {
+    harga = data[selectedPlatform][selectedCategory][selectedOption];
+  }
+
   priceOutput.textContent = `Total Harga: Rp. ${harga.toLocaleString('id-ID')}`;
 }
 
@@ -108,28 +136,30 @@ function isValidLink(link, platform) {
     const postRegex = /^https:\/\/www\.instagram\.com\/p\/.+/;
     return akunRegex.test(link) || postRegex.test(link);
   }
-  return false;
+  return true; // Premium apps tidak perlu link
 }
 
 function confirmOrder() {
   const selectedPlatform = platform.value;
+  const selectedCategory = category.value;
   const produk = option.value;
   const metode = document.getElementById('payment').value;
-  const harga = data[selectedPlatform][category.value][produk];
   const waktu = new Date().toLocaleString('id-ID');
   const link = document.getElementById('link').value.trim();
 
-  if (!link) {
-    alert("Link untuk suntik wajib diisi!");
-    return;
+  let harga = 0;
+  if (selectedPlatform === 'premium') {
+    harga = data.premium.apps[produk];
+  } else {
+    harga = data[selectedPlatform][selectedCategory][produk];
   }
 
-  if (!isValidLink(link, selectedPlatform)) {
+  if (selectedPlatform !== 'premium' && !isValidLink(link, selectedPlatform)) {
     alert("Link tidak valid! Harus berupa link akun atau postingan yang sesuai platform.");
     return;
   }
 
-  const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📱 Platform: ${selectedPlatform}\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n🔗 Link Suntik: ${link}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
+  const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📱 Platform: ${selectedPlatform}\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n${selectedPlatform !== 'premium' ? `🔗 Link Suntik: ${link}\n` : ''}⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
   const encoded = encodeURIComponent(pesan);
   window.open(`https://wa.me/6289529592500?text=${encoded}`);
 }
@@ -139,7 +169,15 @@ function switchPage(pageId) {
   document.getElementById(pageId).classList.add('active');
 }
 
-platform.addEventListener('change', populateOptions);
+platform.addEventListener('change', () => {
+  if (platform.value === 'premium') {
+    category.disabled = true;
+  } else {
+    category.disabled = false;
+  }
+  populateOptions();
+});
+
 category.addEventListener('change', populateOptions);
 option.addEventListener('change', updatePrice);
 
