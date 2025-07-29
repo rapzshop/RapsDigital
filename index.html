@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricelist TikTok - DIGITAL STORE</title>
+  <title>Pricelist Sosial Media - DIGITAL STORE</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -12,13 +12,19 @@
     <h1>DIGITAL STORE
       <span>Tempat Suntik Followers, Views & Likes Termurah & Terpercaya!</span>
     </h1>
-    <h2>Pricelist TikTok</h2>
+    <h2>Pricelist Sosial Media</h2>
+
+    <label for="platform">Pilih Platform:</label><br>
+    <select id="platform">
+      <option value="tiktok">TikTok</option>
+      <option value="instagram">Instagram</option>
+    </select><br>
 
     <label for="category">Pilih Kategori:</label><br>
     <select id="category">
-      <option value="followers">TikTok Followers</option>
-      <option value="likes">TikTok Likes</option>
-      <option value="views">TikTok Views</option>
+      <option value="followers">Followers</option>
+      <option value="likes">Likes</option>
+      <option value="views">Views</option>
     </select><br>
 
     <label for="option">Pilih Jumlah:</label><br>
@@ -34,7 +40,7 @@
     </select><br>
 
     <label for="link">Link Suntik (Wajib):</label><br>
-    <input type="url" id="link" placeholder="https://www.tiktok.com/@username ATAU https://vt.tiktok.com/..." required><br>
+    <input type="url" id="link" placeholder="Contoh: https://www.tiktok.com/@username atau https://www.instagram.com/username" required><br>
 
     <button type="button" onclick="confirmOrder()">💬 Pesan Sekarang</button>
     <br>
@@ -45,10 +51,11 @@
   <div class="container page" id="orderPage">
     <h2>Cara Order</h2>
     <ol>
+      <li>Pilih platform (TikTok atau Instagram)</li>
       <li>Pilih kategori (Followers / Likes / Views)</li>
       <li>Pilih jumlah yang diinginkan</li>
       <li>Lihat total harga otomatis</li>
-      <li>Masukkan link suntik (akun atau video TikTok)</li>
+      <li>Masukkan link suntik (akun atau postingan)</li>
       <li>Pilih metode pembayaran</li>
       <li>Klik tombol "Pesan Sekarang"</li>
       <li>Anda akan diarahkan ke WhatsApp</li>
