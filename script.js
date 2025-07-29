@@ -1,49 +1,87 @@
 const data = {
-  followers: {
-    '100 FOLL': 4000,
-    '200 FOLL': 8000,
-    '300 FOLL': 12000,
-    '400 FOLL': 16000,
-    '500 FOLL': 20000,
-    '600 FOLL': 24000,
-    '700 FOLL': 28000,
-    '800 FOLL': 32000,
-    '900 FOLL': 36000,
-    '1000 FOLL': 40000
+  tiktok: {
+    followers: {
+      '100 FOLL': 4000,
+      '200 FOLL': 8000,
+      '300 FOLL': 12000,
+      '400 FOLL': 16000,
+      '500 FOLL': 20000,
+      '600 FOLL': 24000,
+      '700 FOLL': 28000,
+      '800 FOLL': 32000,
+      '900 FOLL': 36000,
+      '1000 FOLL': 40000
+    },
+    likes: {
+      '500 LIKE': 2000,
+      '600 LIKE': 3000,
+      '700 LIKE': 4000,
+      '800 LIKE': 5000,
+      '900 LIKE': 6000,
+      '1000 LIKE': 7000
+    },
+    views: {
+      '1000 VIEW': 400,
+      '2000 VIEW': 800,
+      '3000 VIEW': 1200,
+      '4000 VIEW': 1600,
+      '5000 VIEW': 2000,
+      '6000 VIEW': 2400,
+      '7000 VIEW': 2800,
+      '8000 VIEW': 3000,
+      '9000 VIEW': 3500,
+      '10000 VIEW': 3800,
+      '15000 VIEW': 4000,
+      '20000 VIEW': 4500,
+      '25000 VIEW': 4800
+    }
   },
-  likes: {
-    '500 LIKE': 2000,
-    '600 LIKE': 3000,
-    '700 LIKE': 4000,
-    '800 LIKE': 5000,
-    '900 LIKE': 6000,
-    '1000 LIKE': 7000
-  },
-  views: {
-    '1000 VIEW': 400,
-    '2000 VIEW': 800,
-    '3000 VIEW': 1200,
-    '4000 VIEW': 1600,
-    '5000 VIEW': 2000,
-    '6000 VIEW': 2400,
-    '7000 VIEW': 2800,
-    '8000 VIEW': 3000,
-    '9000 VIEW': 3500,
-    '10000 VIEW': 3800,
-    '15000 VIEW': 4000,
-    '20000 VIEW': 4500,
-    '25000 VIEW': 4800
+  instagram: {
+    followers: {
+      '100 FOLL': 3500,
+      '200 FOLL': 7000,
+      '300 FOLL': 10500,
+      '400 FOLL': 13500,
+      '500 FOLL': 17000,
+      '600 FOLL': 20500,
+      '700 FOLL': 23500,
+      '800 FOLL': 27000,
+      '900 FOLL': 30500,
+      '1000 FOLL': 34000
+    },
+    likes: {
+      '500 LIKE': 2000,
+      '600 LIKE': 2500,
+      '700 LIKE': 3000,
+      '800 LIKE': 3500,
+      '900 LIKE': 4000,
+      '1000 LIKE': 4500
+    },
+    views: {
+      '1000 VIEW': 2000,
+      '2000 VIEW': 4000,
+      '3000 VIEW': 6000,
+      '4000 VIEW': 8000,
+      '5000 VIEW': 10000,
+      '6000 VIEW': 12000,
+      '7000 VIEW': 14000,
+      '8000 VIEW': 16000,
+      '9000 VIEW': 17000,
+      '10000 VIEW': 19000
+    }
   }
 };
 
+const platform = document.getElementById('platform');
 const category = document.getElementById('category');
 const option = document.getElementById('option');
 const priceOutput = document.getElementById('price');
 
 function populateOptions() {
   option.innerHTML = '';
-  const selected = category.value;
-  Object.keys(data[selected]).forEach(key => {
+  const selectedPlatform = platform.value;
+  const selectedCategory = category.value;
+  Object.keys(data[selectedPlatform][selectedCategory]).forEach(key => {
     const opt = document.createElement('option');
     opt.value = key;
     opt.textContent = key;
@@ -53,22 +91,31 @@ function populateOptions() {
 }
 
 function updatePrice() {
+  const selectedPlatform = platform.value;
   const selectedCategory = category.value;
   const selectedOption = option.value;
-  const harga = data[selectedCategory][selectedOption];
+  const harga = data[selectedPlatform][selectedCategory][selectedOption];
   priceOutput.textContent = `Total Harga: Rp. ${harga.toLocaleString('id-ID')}`;
 }
 
-function isValidTiktokLink(link) {
-  const akunRegex = /^https:\/\/www\.tiktok\.com\/@[\w._-]+$/;
-  const videoRegex = /^https:\/\/vt\.tiktok\.com\/.+/;
-  return akunRegex.test(link) || videoRegex.test(link);
+function isValidLink(link, platform) {
+  if (platform === 'tiktok') {
+    const akunRegex = /^https:\/\/www\.tiktok\.com\/@[\w._-]+$/;
+    const videoRegex = /^https:\/\/vt\.tiktok\.com\/.+/;
+    return akunRegex.test(link) || videoRegex.test(link);
+  } else if (platform === 'instagram') {
+    const akunRegex = /^https:\/\/www\.instagram\.com\/[\w._-]+$/;
+    const postRegex = /^https:\/\/www\.instagram\.com\/p\/.+/;
+    return akunRegex.test(link) || postRegex.test(link);
+  }
+  return false;
 }
 
 function confirmOrder() {
+  const selectedPlatform = platform.value;
   const produk = option.value;
   const metode = document.getElementById('payment').value;
-  const harga = data[category.value][produk];
+  const harga = data[selectedPlatform][category.value][produk];
   const waktu = new Date().toLocaleString('id-ID');
   const link = document.getElementById('link').value.trim();
 
@@ -77,12 +124,12 @@ function confirmOrder() {
     return;
   }
 
-  if (!isValidTiktokLink(link)) {
-    alert("Link tidak valid! Harus berupa link akun TikTok (https://www.tiktok.com/@...) atau link video TikTok (https://vt.tiktok.com/...)");
+  if (!isValidLink(link, selectedPlatform)) {
+    alert("Link tidak valid! Harus berupa link akun atau postingan yang sesuai platform.");
     return;
   }
 
-  const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n🔗 Link Suntik: ${link}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
+  const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📱 Platform: ${selectedPlatform}\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n🔗 Link Suntik: ${link}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
   const encoded = encodeURIComponent(pesan);
   window.open(`https://wa.me/6289529592500?text=${encoded}`);
 }
@@ -92,6 +139,7 @@ function switchPage(pageId) {
   document.getElementById(pageId).classList.add('active');
 }
 
+platform.addEventListener('change', populateOptions);
 category.addEventListener('change', populateOptions);
 option.addEventListener('change', updatePrice);
 
