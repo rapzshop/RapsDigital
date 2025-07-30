@@ -7,14 +7,37 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
   <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .fyp-title {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      background: linear-gradient(90deg, #ff4d6d, #ff1c4d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
     .fyp-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
-      margin-top: 20px;
     }
     .fyp-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 12px;
       padding: 15px;
       text-align: center;
@@ -31,10 +54,16 @@
     }
     .fyp-card p {
       margin: 5px 0;
-      font-size: 14px;
+    }
+    .fyp-card input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 5px;
+      border-radius: 6px;
+      border: none;
     }
     .fyp-card button {
-      margin-top: 10px;
+      margin-top: 8px;
       background: linear-gradient(135deg, #ff4d6d, #ff1c4d);
       border: none;
       padding: 8px 15px;
@@ -42,10 +71,20 @@
       font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
     }
-    .fyp-card button:hover {
-      background: linear-gradient(135deg, #ff1c4d, #ff4d6d);
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #4cc9f0, #3a86ff);
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+    .back-button:hover {
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -97,67 +136,42 @@
   </div>
 
   <div class="container page" id="fypPage">
-    <h2>🔥 Paket FYP TikTok</h2>
+    <h2 class="fyp-title">🔥 Paket FYP TikTok</h2>
     <div class="fyp-cards">
       <div class="fyp-card">
         <h3>AA</h3>
         <p>100 Like + 2000 View</p>
-        <p>Harga: Rp 1.500</p>
-        <button onclick="orderFYP('AA', '100 Like + 2000 View', 1500)">Pesan</button>
+        <p>Rp 1.500</p>
+        <input type="url" placeholder="Link TikTok" id="fyp-link-aa">
+        <button onclick="orderFYP('AA','100 Like + 2000 View',1500,'fyp-link-aa')">Pesan</button>
       </div>
       <div class="fyp-card">
         <h3>BB</h3>
         <p>150 Like + 2000 View</p>
-        <p>Harga: Rp 2.000</p>
-        <button onclick="orderFYP('BB', '150 Like + 2000 View', 2000)">Pesan</button>
+        <p>Rp 2.000</p>
+        <input type="url" placeholder="Link TikTok" id="fyp-link-bb">
+        <button onclick="orderFYP('BB','150 Like + 2000 View',2000,'fyp-link-bb')">Pesan</button>
       </div>
       <div class="fyp-card">
         <h3>CC</h3>
         <p>300 Like + 5000 View</p>
-        <p>Harga: Rp 3.500</p>
-        <button onclick="orderFYP('CC', '300 Like + 5000 View', 3500)">Pesan</button>
+        <p>Rp 3.500</p>
+        <input type="url" placeholder="Link TikTok" id="fyp-link-cc">
+        <button onclick="orderFYP('CC','300 Like + 5000 View',3500,'fyp-link-cc')">Pesan</button>
       </div>
       <div class="fyp-card">
         <h3>DD</h3>
         <p>500 Like + 6500 View</p>
-        <p>Harga: Rp 4.000</p>
-        <button onclick="orderFYP('DD', '500 Like + 6500 View', 4000)">Pesan</button>
+        <p>Rp 4.000</p>
+        <input type="url" placeholder="Link TikTok" id="fyp-link-dd">
+        <button onclick="orderFYP('DD','500 Like + 6500 View',4000,'fyp-link-dd')">Pesan</button>
       </div>
       <div class="fyp-card">
         <h3>EE</h3>
         <p>700 Like + 10000 View</p>
-        <p>Harga: Rp 6.000</p>
-        <button onclick="orderFYP('EE', '700 Like + 10000 View', 6000)">Pesan</button>
-      </div>
-      <div class="fyp-card">
-        <h3>50 Foll Paket</h3>
-        <p>50 Foll + 100 Like + 2000 View</p>
-        <p>Harga: Rp 3.000</p>
-        <button onclick="orderFYP('50 Foll', '50 Foll + 100 Like + 2000 View', 3000)">Pesan</button>
-      </div>
-      <div class="fyp-card">
-        <h3>100 Foll Paket</h3>
-        <p>100 Foll + 150 Like + 2000 View</p>
-        <p>Harga: Rp 5.000</p>
-        <button onclick="orderFYP('100 Foll', '100 Foll + 150 Like + 2000 View', 5000)">Pesan</button>
-      </div>
-      <div class="fyp-card">
-        <h3>150 Foll Paket</h3>
-        <p>150 Foll + 350 Like + 5000 View</p>
-        <p>Harga: Rp 7.000</p>
-        <button onclick="orderFYP('150 Foll', '150 Foll + 350 Like + 5000 View', 7000)">Pesan</button>
-      </div>
-      <div class="fyp-card">
-        <h3>200 Foll Paket</h3>
-        <p>200 Foll + 500 Like + 6500 View</p>
-        <p>Harga: Rp 9.000</p>
-        <button onclick="orderFYP('200 Foll', '200 Foll + 500 Like + 6500 View', 9000)">Pesan</button>
-      </div>
-      <div class="fyp-card">
-        <h3>300 Foll Paket</h3>
-        <p>300 Foll + 700 Like + 10000 View</p>
-        <p>Harga: Rp 13.000</p>
-        <button onclick="orderFYP('300 Foll', '300 Foll + 700 Like + 10000 View', 13000)">Pesan</button>
+        <p>Rp 6.000</p>
+        <input type="url" placeholder="Link TikTok" id="fyp-link-ee">
+        <button onclick="orderFYP('EE','700 Like + 10000 View',6000,'fyp-link-ee')">Pesan</button>
       </div>
     </div>
     <a href="#" class="back-button" onclick="switchPage('homePage')">⬅️ Kembali</a>
@@ -169,6 +183,7 @@
       <img src="https://files.catbox.moe/qmkada.jpg" alt="Pricelist 1">
       <img src="https://files.catbox.moe/xfgb76.jpg" alt="Pricelist 2">
       <img src="https://files.catbox.moe/xuobve.jpg" alt="Pricelist 3">
+      <img src="https://files.catbox.moe/DQthCdB8.jpg" alt="Pricelist FYP">
     </div>
     <a href="#" class="back-button" onclick="switchPage('homePage')">⬅️ Kembali</a>
   </div>
@@ -180,7 +195,7 @@
       <li>Pilih kategori (hanya untuk TikTok & Instagram)</li>
       <li>Pilih paket yang diinginkan</li>
       <li>Lihat total harga otomatis</li>
-      <li>Jika platform TikTok/Instagram, masukkan link akun/postingan</li>
+      <li>Jika platform TikTok/Instagram atau Paket FYP, masukkan link akun/postingan</li>
       <li>Pilih metode pembayaran</li>
       <li>Klik tombol "Pesan Sekarang"</li>
       <li>Anda akan diarahkan ke WhatsApp untuk konfirmasi</li>
@@ -205,10 +220,27 @@
   </div>
 
   <script>
-    function orderFYP(paket, deskripsi, harga) {
+    function isValidTiktokLink(link) {
+      const akunRegex = /^https:\/\/www\.tiktok\.com\/@[\w._-]+$/;
+      const videoRegex = /^https:\/\/vt\.tiktok\.com\/.+/;
+      return akunRegex.test(link) || videoRegex.test(link);
+    }
+
+    function orderFYP(paket, deskripsi, harga, linkId) {
       const metode = document.getElementById('payment').value;
+      const link = document.getElementById(linkId).value.trim();
+
+      if (!link) {
+        alert("Link TikTok wajib diisi untuk Paket FYP!");
+        return;
+      }
+      if (!isValidTiktokLink(link)) {
+        alert("Link TikTok tidak valid! Harus berupa link akun atau video TikTok.");
+        return;
+      }
+
       const waktu = new Date().toLocaleString('id-ID');
-      const pesan = `🔥 Halo Digital Store!\n\nSaya mau pesan Paket FYP:\n📦 ${paket} - ${deskripsi}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
+      const pesan = `🔥 Halo Digital Store!\n\nSaya mau pesan Paket FYP:\n📦 ${paket} - ${deskripsi}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n🔗 Link TikTok: ${link}\n💳 Pembayaran: ${metode}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
       window.open(`https://wa.me/6289529592500?text=${encodeURIComponent(pesan)}`);
     }
   </script>
