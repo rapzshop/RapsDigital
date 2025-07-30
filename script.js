@@ -72,26 +72,26 @@ const data = {
   },
   premium: {
     apps: {
-      'YouTube Premium 1 Bulan': 4000,
-      'CapCut Pro 1 Bulan': 20000,
-      'ChatGPT Pro 1 Bulan': 20000,
-      'AM Premium 1 Bulan Private': 8000,
-      'Viu Premium 1 Bulan Private': 4000,
-      'Canva 1 Bulan Private': 3000
+      '🎥 YouTube Premium 1 Bulan': 4000,
+      '🎬 CapCut Pro 1 Bulan': 20000,
+      '🤖 ChatGPT Pro 1 Bulan': 20000,
+      '🎶 AM Premium 1 Bulan Private': 8000,
+      '🎞️ Viu Premium 1 Bulan Private': 4000,
+      '🎨 Canva 1 Bulan Private': 3000
     }
   },
   fyp: {
     paket: {
-      'AA - 100 Like + 2000 View': 1500,
-      'BB - 150 Like + 2000 View': 2000,
-      'CC - 300 Like + 5000 View': 3500,
-      'DD - 500 Like + 6500 View': 4000,
-      'EE - 700 Like + 10000 View': 6000,
-      '50 Foll Paket': 3000,
-      '100 Foll Paket': 5000,
-      '150 Foll Paket': 7000,
-      '200 Foll Paket': 9000,
-      '300 Foll Paket': 13000
+      '🔥 AA - 100 Like + 2000 View': 1500,
+      '🔥 BB - 150 Like + 2000 View': 2000,
+      '🔥 CC - 300 Like + 5000 View': 3500,
+      '🔥 DD - 500 Like + 6500 View': 4000,
+      '🔥 EE - 700 Like + 10000 View': 6000,
+      '⭐ 50 Foll + 100 Like + 2000 View': 3000,
+      '⭐ 100 Foll + 150 Like + 2000 View': 5000,
+      '⭐ 150 Foll + 350 Like + 5000 View': 7000,
+      '⭐ 200 Foll + 500 Like + 6500 View': 9000,
+      '⭐ 300 Foll + 700 Like + 10000 View': 13000
     }
   }
 };
@@ -128,7 +128,6 @@ function populateOptions() {
       option.appendChild(opt);
     });
   }
-
   updatePrice();
 }
 
