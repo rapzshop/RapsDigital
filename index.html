@@ -3,78 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pricelist Sosial Media & Aplikasi Premium - DIGITAL STORE</title>
+  <title>Pricelist Sosial Media & Paket FYP - DIGITAL STORE</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
   <style>
-    .gallery {
+    .fyp-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
-      margin-top: 25px;
+      margin-top: 20px;
     }
-    .gallery img {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .gallery img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
-    }
-    .back-button {
-      display: inline-block;
-      margin-top: 25px;
-      background: linear-gradient(135deg, #4cc9f0, #3a86ff);
-      color: white;
-      padding: 12px 25px;
+    .fyp-card {
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s;
-    }
-    .back-button:hover {
-      opacity: 0.95;
-      transform: translateY(-3px);
-    }
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
+      padding: 15px;
+      text-align: center;
       color: white;
-      font-size: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .fyp-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+    .fyp-card h3 {
+      margin-bottom: 10px;
+    }
+    .fyp-card p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    .fyp-card button {
+      margin-top: 10px;
+      background: linear-gradient(135deg, #ff4d6d, #ff1c4d);
+      border: none;
+      padding: 8px 15px;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+    .fyp-card button:hover {
+      background: linear-gradient(135deg, #ff1c4d, #ff4d6d);
     }
   </style>
 </head>
 <body>
   <div class="container page active" id="homePage">
     <h1>DIGITAL STORE
-      <span>Tempat Suntik Followers, Views, Likes & Aplikasi Premium Terpercaya!</span>
+      <span>Tempat Suntik Followers, Views, Likes, Paket FYP & Aplikasi Premium Terpercaya!</span>
     </h1>
     <h2>Pricelist</h2>
 
     <button type="button" onclick="switchPage('pricelistPage')">📷 Lihat Pricelist Foto</button>
+    <button type="button" onclick="switchPage('fypPage')">🔥 Paket FYP TikTok</button>
 
     <label for="platform">Pilih Platform:</label><br>
     <select id="platform">
@@ -113,25 +96,87 @@
     </div>
   </div>
 
-  <div class="container page" id="pricelistPage">
-    <h2>📷 Galeri Pricelist</h2>
-    <div class="gallery">
-      <img src="https://files.catbox.moe/qmkada.jpg" alt="Pricelist 1" onclick="openLightbox(this.src)">
-      <img src="https://files.catbox.moe/xfgb76.jpg" alt="Pricelist 2" onclick="openLightbox(this.src)">
-      <img src="https://files.catbox.moe/xuobve.jpg" alt="Pricelist 3" onclick="openLightbox(this.src)">
+  <div class="container page" id="fypPage">
+    <h2>🔥 Paket FYP TikTok</h2>
+    <div class="fyp-cards">
+      <div class="fyp-card">
+        <h3>AA</h3>
+        <p>100 Like + 2000 View</p>
+        <p>Harga: Rp 1.500</p>
+        <button onclick="orderFYP('AA', '100 Like + 2000 View', 1500)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>BB</h3>
+        <p>150 Like + 2000 View</p>
+        <p>Harga: Rp 2.000</p>
+        <button onclick="orderFYP('BB', '150 Like + 2000 View', 2000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>CC</h3>
+        <p>300 Like + 5000 View</p>
+        <p>Harga: Rp 3.500</p>
+        <button onclick="orderFYP('CC', '300 Like + 5000 View', 3500)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>DD</h3>
+        <p>500 Like + 6500 View</p>
+        <p>Harga: Rp 4.000</p>
+        <button onclick="orderFYP('DD', '500 Like + 6500 View', 4000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>EE</h3>
+        <p>700 Like + 10000 View</p>
+        <p>Harga: Rp 6.000</p>
+        <button onclick="orderFYP('EE', '700 Like + 10000 View', 6000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>50 Foll Paket</h3>
+        <p>50 Foll + 100 Like + 2000 View</p>
+        <p>Harga: Rp 3.000</p>
+        <button onclick="orderFYP('50 Foll', '50 Foll + 100 Like + 2000 View', 3000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>100 Foll Paket</h3>
+        <p>100 Foll + 150 Like + 2000 View</p>
+        <p>Harga: Rp 5.000</p>
+        <button onclick="orderFYP('100 Foll', '100 Foll + 150 Like + 2000 View', 5000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>150 Foll Paket</h3>
+        <p>150 Foll + 350 Like + 5000 View</p>
+        <p>Harga: Rp 7.000</p>
+        <button onclick="orderFYP('150 Foll', '150 Foll + 350 Like + 5000 View', 7000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>200 Foll Paket</h3>
+        <p>200 Foll + 500 Like + 6500 View</p>
+        <p>Harga: Rp 9.000</p>
+        <button onclick="orderFYP('200 Foll', '200 Foll + 500 Like + 6500 View', 9000)">Pesan</button>
+      </div>
+      <div class="fyp-card">
+        <h3>300 Foll Paket</h3>
+        <p>300 Foll + 700 Like + 10000 View</p>
+        <p>Harga: Rp 13.000</p>
+        <button onclick="orderFYP('300 Foll', '300 Foll + 700 Like + 10000 View', 13000)">Pesan</button>
+      </div>
     </div>
     <a href="#" class="back-button" onclick="switchPage('homePage')">⬅️ Kembali</a>
   </div>
 
-  <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <img id="lightbox-img" src="" alt="Preview">
+  <div class="container page" id="pricelistPage">
+    <h2>📷 Galeri Pricelist</h2>
+    <div class="gallery">
+      <img src="https://files.catbox.moe/qmkada.jpg" alt="Pricelist 1">
+      <img src="https://files.catbox.moe/xfgb76.jpg" alt="Pricelist 2">
+      <img src="https://files.catbox.moe/xuobve.jpg" alt="Pricelist 3">
+    </div>
+    <a href="#" class="back-button" onclick="switchPage('homePage')">⬅️ Kembali</a>
   </div>
 
   <div class="container page" id="orderPage">
     <h2>Cara Order</h2>
     <ol>
-      <li>Pilih platform (TikTok, Instagram, atau Aplikasi Premium)</li>
+      <li>Pilih platform (TikTok, Instagram, Aplikasi Premium, atau Paket FYP)</li>
       <li>Pilih kategori (hanya untuk TikTok & Instagram)</li>
       <li>Pilih paket yang diinginkan</li>
       <li>Lihat total harga otomatis</li>
@@ -160,12 +205,11 @@
   </div>
 
   <script>
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').style.display = 'flex';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
+    function orderFYP(paket, deskripsi, harga) {
+      const metode = document.getElementById('payment').value;
+      const waktu = new Date().toLocaleString('id-ID');
+      const pesan = `🔥 Halo Digital Store!\n\nSaya mau pesan Paket FYP:\n📦 ${paket} - ${deskripsi}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
+      window.open(`https://wa.me/6289529592500?text=${encodeURIComponent(pesan)}`);
     }
   </script>
 </body>
