@@ -79,6 +79,20 @@ const data = {
       'Viu Premium 1 Bulan Private': 4000,
       'Canva 1 Bulan Private': 3000
     }
+  },
+  fyp: {
+    paket: {
+      'AA - 100 Like + 2000 View': 1500,
+      'BB - 150 Like + 2000 View': 2000,
+      'CC - 300 Like + 5000 View': 3500,
+      'DD - 500 Like + 6500 View': 4000,
+      'EE - 700 Like + 10000 View': 6000,
+      '50 Foll Paket': 3000,
+      '100 Foll Paket': 5000,
+      '150 Foll Paket': 7000,
+      '200 Foll Paket': 9000,
+      '300 Foll Paket': 13000
+    }
   }
 };
 
@@ -94,6 +108,13 @@ function populateOptions() {
 
   if (selectedPlatform === 'premium') {
     Object.keys(data.premium.apps).forEach(key => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = key;
+      option.appendChild(opt);
+    });
+  } else if (selectedPlatform === 'fyp') {
+    Object.keys(data.fyp.paket).forEach(key => {
       const opt = document.createElement('option');
       opt.value = key;
       opt.textContent = key;
@@ -115,53 +136,46 @@ function updatePrice() {
   const selectedPlatform = platform.value;
   const selectedCategory = category.value;
   const selectedOption = option.value;
-
   let harga = 0;
   if (selectedPlatform === 'premium') {
     harga = data.premium.apps[selectedOption];
+  } else if (selectedPlatform === 'fyp') {
+    harga = data.fyp.paket[selectedOption];
   } else {
     harga = data[selectedPlatform][selectedCategory][selectedOption];
   }
-
-  priceOutput.textContent = `Total Harga: Rp. ${harga.toLocaleString('id-ID')}`;
+  priceOutput.textContent = `Total Harga: Rp. ${harga ? harga.toLocaleString('id-ID') : 0}`;
 }
 
-function isValidLink(link, platform) {
-  if (platform === 'tiktok') {
-    const akunRegex = /^https:\/\/www\.tiktok\.com\/@[\w._-]+$/;
-    const videoRegex = /^https:\/\/vt\.tiktok\.com\/.+/;
-    return akunRegex.test(link) || videoRegex.test(link);
-  } else if (platform === 'instagram') {
-    const akunRegex = /^https:\/\/www\.instagram\.com\/[\w._-]+$/;
-    const postRegex = /^https:\/\/www\.instagram\.com\/p\/.+/;
-    return akunRegex.test(link) || postRegex.test(link);
-  }
-  return true; // Premium apps tidak perlu link
+function isValidTiktokLink(link) {
+  const akunRegex = /^https:\/\/www\.tiktok\.com\/@[\w._-]+$/;
+  const videoRegex = /^https:\/\/vt\.tiktok\.com\/.+/;
+  return akunRegex.test(link) || videoRegex.test(link);
 }
 
 function confirmOrder() {
-  const selectedPlatform = platform.value;
-  const selectedCategory = category.value;
   const produk = option.value;
   const metode = document.getElementById('payment').value;
+  const selectedPlatform = platform.value;
+  const harga = selectedPlatform === 'premium' ? data.premium.apps[produk] : selectedPlatform === 'fyp' ? data.fyp.paket[produk] : data[selectedPlatform][category.value][produk];
   const waktu = new Date().toLocaleString('id-ID');
   const link = document.getElementById('link').value.trim();
 
-  let harga = 0;
-  if (selectedPlatform === 'premium') {
-    harga = data.premium.apps[produk];
-  } else {
-    harga = data[selectedPlatform][selectedCategory][produk];
+  if (selectedPlatform !== 'premium') {
+    if (!link) {
+      alert("Link wajib diisi!");
+      return;
+    }
+    if (selectedPlatform === 'tiktok' || selectedPlatform === 'fyp') {
+      if (!isValidTiktokLink(link)) {
+        alert("Link TikTok tidak valid! Harus berupa link akun atau video TikTok.");
+        return;
+      }
+    }
   }
 
-  if (selectedPlatform !== 'premium' && !isValidLink(link, selectedPlatform)) {
-    alert("Link tidak valid! Harus berupa link akun atau postingan yang sesuai platform.");
-    return;
-  }
-
-  const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📱 Platform: ${selectedPlatform}\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n💳 Pembayaran: ${metode}\n${selectedPlatform !== 'premium' ? `🔗 Link Suntik: ${link}\n` : ''}⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
-  const encoded = encodeURIComponent(pesan);
-  window.open(`https://wa.me/6289529592500?text=${encoded}`);
+  const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📱 Platform: ${selectedPlatform}\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n${selectedPlatform !== 'premium' ? `🔗 Link: ${link}\n` : ''}💳 Pembayaran: ${metode}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
+  window.open(`https://wa.me/6289529592500?text=${encodeURIComponent(pesan)}`);
 }
 
 function switchPage(pageId) {
@@ -170,11 +184,7 @@ function switchPage(pageId) {
 }
 
 platform.addEventListener('change', () => {
-  if (platform.value === 'premium') {
-    category.disabled = true;
-  } else {
-    category.disabled = false;
-  }
+  category.disabled = platform.value === 'premium' || platform.value === 'fyp';
   populateOptions();
 });
 
