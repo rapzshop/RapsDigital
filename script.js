@@ -174,7 +174,7 @@ function confirmOrder() {
   }
 
   const pesan = `✨ Halo Digital Store!\n\nSaya mau pesan:\n📱 Platform: ${selectedPlatform}\n📦 Produk: ${produk}\n💸 Harga: Rp ${harga.toLocaleString('id-ID')}\n${selectedPlatform !== 'premium' ? `🔗 Link: ${link}\n` : ''}💳 Pembayaran: ${metode}\n⏰ Jam Pesan: ${waktu}\n\nTerima kasih 🙏🏻`;
-  window.open(`https://wa.me/6289529592500?text=${encodeURIComponent(pesan)}`);
+  window.open(`https://wa.me/6289525156094?text=${encodeURIComponent(pesan)}`);
 }
 
 function switchPage(pageId) {
